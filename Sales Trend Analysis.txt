@@ -1,0 +1,15 @@
+-- Analyze monthly revenue and order volume from online_sales dataset
+SELECT 
+    EXTRACT(YEAR FROM order_date) AS year,
+    EXTRACT(MONTH FROM order_date) AS month,
+    SUM(amount) AS total_revenue,
+    COUNT(DISTINCT order_id) AS order_volume
+FROM 
+    online_sales
+GROUP BY 
+    EXTRACT(YEAR FROM order_date),
+    EXTRACT(MONTH FROM order_date)
+ORDER BY 
+    year ASC, 
+    month ASC
+LIMIT 12; -- Limit to last 12 months for concise output
