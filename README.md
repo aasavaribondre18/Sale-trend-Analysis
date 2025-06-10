@@ -43,4 +43,21 @@ This project demonstrates how to:
 
 ```sql
 SELECT
-    YEAR(InvoiceDate
+    YEAR(InvoiceDate) AS year,
+    MONTH(InvoiceDate) AS month,
+    SUM(Quantity * UnitPrice) AS total_revenue,
+    COUNT(DISTINCT InvoiceNo) AS order_volume
+FROM
+    online_retail
+WHERE
+    InvoiceDate IS NOT NULL
+    AND Quantity > 0
+    AND UnitPrice > 0
+GROUP BY
+    YEAR(InvoiceDate),
+    MONTH(InvoiceDate)
+ORDER BY
+    year ASC,
+    month ASC;
+
+
